@@ -21,6 +21,18 @@ replace `skill-name` with the name of a skill from the list below.
 | `ponytail-debt`   | Lists every `shortcut:` comment as a ledger of deferred work.            | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-gain`   | Shows the savings that the upstream ponytail benchmark measured.         | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-help`   | Shows a quick reference for the ponytail skills and levels.              | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `problem-solving` | Runs 2 to 4 thinking frameworks in parallel and gives a decision brief.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
+| `pua`             | Pushes the agent to retry, change approach, and prove work with output.  | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-en`          | English version of `pua`.                                                | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-ja`          | Japanese version of `pua`.                                               | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-ding`        | Gives Ding-style workplace and delivery-process reminders.               | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-mama`        | Same rules as `pua`, in the voice of a nagging Chinese mother.           | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-p7`          | Senior-engineer mode: plan, code, then a three-question self-review.     | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-p9`          | Tech-lead mode: writes task prompts for parallel agents, not code.       | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-p10`         | CTO mode: sets strategic direction and designs the agent team.           | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-pro`         | Adds local progress notes, state recovery, and flavors to `pua`.         | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-shot`        | A compact all-in-one `pua` reference to give to subagents.               | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
+| `pua-yes`         | Same rules as `pua`, in an encouraging voice instead of pressure.        | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
 
 A skill copied from another project records its source and changes in
 `UPSTREAM.md` in its own directory.
