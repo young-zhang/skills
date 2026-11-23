@@ -15,6 +15,9 @@ replace `skill-name` with the name of a skill from the list below.
 | Skill             | What it does                                                             | Source                                                                                | License |
 | ----------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------- |
 | `reprompt`        | Rewrites a prompt to be more ambitious. Runs only when you invoke it.    | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
+| `codex-consult`   | Asks the Codex CLI for a read-only second opinion on one question.       | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
+| `duel-plan`       | Claude and the Codex CLI each plan a change, debate, and merge plans.    | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
+| `duel-review`     | Claude and the Codex CLI each review a pull request, then debate.        | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
 | `ponytail`        | Makes the agent write the smallest change that fully solves the task.    | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-review` | Reviews a change for bugs, security, load, tests, speed, and extra code. | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-audit`  | Reviews a whole repository for the same problems as `ponytail-review`.   | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
