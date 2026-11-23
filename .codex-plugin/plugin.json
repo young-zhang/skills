@@ -1,6 +1,6 @@
 {
   "name": "yz",
-  "version": "26.325.3",
+  "version": "26.325.4",
   "description": "A portable collection of agent skills and utilities for Claude Code, Codex CLI, Google Antigravity, and GitHub Copilot CLI.",
   "author": {
     "name": "Young Zhang",
