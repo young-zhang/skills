@@ -1,0 +1,42 @@
+# Local agent settings. The plugin manifests (.claude-plugin/, .codex-plugin/,
+# .agents/plugins/, .antigravity-plugin/) and the shared instructions
+# (AGENTS.md, CLAUDE.md) stay tracked.
+.claude/settings.local.json
+CLAUDE.local.md
+AGENTS.override.md
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor clutter
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated files. Root-only rules start with "/" so that they do not hide a
+# skill directory with the same name, such as skills/build/.
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+/dist/
+/build/
+*.log
+
+# Local working notes at the repository root
+/tasks/
+/logs/
+/temp/

@@ -1,0 +1,18 @@
+{
+  "name": "young-zhang-skills",
+  "description": "Young's Skills: agent skills and utilities packaged as the yz plugin.",
+  "owner": {
+    "name": "Young Zhang",
+    "url": "https://github.com/young-zhang"
+  },
+  "plugins": [
+    {
+      "name": "yz",
+      "displayName": "Young's Skills",
+      "source": "./",
+      "description": "A portable collection of agent skills and utilities.",
+      "category": "productivity",
+      "homepage": "https://github.com/young-zhang/skills"
+    }
+  ]
+}
