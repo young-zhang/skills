@@ -27,6 +27,7 @@ replace `skill-name` with the name of a skill from the list below.
 | `commit-often`    | Does a task as small commits that Codex checks. Runs only when invoked.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
 | `pony-review`     | Reviews a change with `ponytail-review`, then `duel-review`, and fixes.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
 | `problem-solving` | Runs 2 to 4 thinking frameworks in parallel and gives a decision brief.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
+| `update-global`   | Adds the yz preferences to global instructions. Runs only when invoked.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
 | `pua`             | Pushes the agent to retry, change approach, and prove work with output.  | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
 | `pua-en`          | English version of `pua`.                                                | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
 | `pua-ja`          | Japanese version of `pua`.                                               | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
