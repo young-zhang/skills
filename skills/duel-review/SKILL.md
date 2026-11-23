@@ -1,6 +1,6 @@
 ---
 name: duel-review
-description: Use when you want two agents to review a pull request (GitHub) or merge request (GitLab) and challenge each other before you act on it — give a PR or MR link (or number/branch) and Claude and the Codex CLI each review it independently, then debate the findings. Triggers like "duel review", "duel review this PR", "duel review this MR", "have Claude and Codex review this pull request", "review this PR with Codex", "two-agent PR review". Requires the codex CLI, plus gh for GitHub or glab for GitLab, installed and authenticated. Not for reviewing local uncommitted changes (that is the Watchdog) or for planning (use duel-plan).
+description: Use when you want two agents to review a pull request (GitHub) or merge request (GitLab) and challenge each other before you act on it — give a PR or MR link (or number/branch) and Claude and the Codex CLI each review it independently, then debate the findings. Triggers like "duel review", "duel review this PR", "duel review this MR", "have Claude and Codex review this pull request", "review this PR with Codex", "two-agent PR review". Requires the codex CLI, plus gh for GitHub or glab for GitLab, installed and authenticated. Not for planning (use duel-plan).
 license: MIT (see LICENSE)
 ---
 
@@ -13,7 +13,7 @@ Two independent agents review a pull request and challenge each other. Claude an
 - A pull request where a single reviewer might miss something, or you want an adversarial cross-check before merging
 - You want two models' findings reconciled into one ranked list
 
-**Not for:** reviewing your own local uncommitted changes (that is the Watchdog hook); planning a change (use the `duel-plan` skill).
+**Not for:** planning a change (use the `duel-plan` skill).
 
 ## Prerequisites
 The `codex` CLI must be installed and authenticated (`codex login`). For a GitHub pull request, the `gh` CLI must be installed and authenticated (`gh auth status`). For a GitLab merge request, the `glab` CLI must be installed and authenticated (`glab auth status`). If a required CLI is missing, tell the user and stop. **Codex is stateless across calls**, so every call must carry the full debate so far.
@@ -72,7 +72,7 @@ Run `codex exec` with stdin redirected from `/dev/null`. If stdin stays open, Co
 ## Quick reference
 | Step | Who | Output |
 |---|---|---|
-| Fetch | Claude (`gh`) | PR description + diff |
+| Fetch | Claude (`gh` or `glab`) | PR description + diff |
 | Review A | Claude | findings + severity |
 | Review B | Codex | findings + severity |
 | Challenge ×≤2 | both | concessions + defenses |

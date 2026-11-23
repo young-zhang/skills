@@ -17,13 +17,15 @@ replace `skill-name` with the name of a skill from the list below.
 | `reprompt`        | Rewrites a prompt to be more ambitious. Runs only when you invoke it.    | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
 | `codex-consult`   | Asks the Codex CLI for a read-only second opinion on one question.       | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
 | `duel-plan`       | Claude and the Codex CLI each plan a change, debate, and merge plans.    | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
-| `duel-review`     | Claude and the Codex CLI each review a pull request, then debate.        | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
+| `duel-review`     | Claude and the Codex CLI each review a PR or GitLab MR, then debate.     | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
 | `ponytail`        | Makes the agent write the smallest change that fully solves the task.    | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-review` | Reviews a change for bugs, security, load, tests, speed, and extra code. | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-audit`  | Reviews a whole repository for the same problems as `ponytail-review`.   | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-debt`   | Lists every `shortcut:` comment as a ledger of deferred work.            | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-gain`   | Shows the savings that the upstream ponytail benchmark measured.         | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 | `ponytail-help`   | Shows a quick reference for the ponytail skills and levels.              | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `commit-often`    | Does a task as small commits that Codex checks. Runs only when invoked.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
+| `pony-review`     | Reviews a change with `ponytail-review`, then `duel-review`, and fixes.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
 | `problem-solving` | Runs 2 to 4 thinking frameworks in parallel and gives a decision brief.  | Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)              | MIT     |
 | `pua`             | Pushes the agent to retry, change approach, and prove work with output.  | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |
 | `pua-en`          | English version of `pua`.                                                | TanWei Security Lab, [tanweai/pua](https://github.com/tanweai/pua)                    | MIT     |

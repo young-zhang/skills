@@ -17,15 +17,18 @@ only for a decision that the user must make (see "When to ask").
 
 ## 1. Start
 
-1. Run `codex --version`. If the codex CLI is missing or not logged in, use
+1. Run `codex login status`. If the codex CLI is missing or not logged in, use
    AskUserQuestion: continue without the Codex steps, or stop.
-2. Record the start commit: `git rev-parse HEAD`. The final review covers
+2. Run `git status --short`. If it shows changes, they are not part of the
+   task yet, and a commit could take them in. Use AskUserQuestion: they
+   belong to the task, or stop so that the user can commit or stash them.
+3. Record the start commit: `git rev-parse HEAD`. The final review covers
    every commit after it.
-3. Commit on the branch that is checked out. Do not create, switch, merge,
+4. Commit on the branch that is checked out. Do not create, switch, merge,
    or rebase branches unless the user asks.
-4. Read the commit rules of the repository (for example `AGENTS.md`,
+5. Read the commit rules of the repository (for example `AGENTS.md`,
    `CLAUDE.md`, `CONTRIBUTING.md`), and follow them for every commit.
-5. Split the task into work units. A work unit is the smallest change that
+6. Split the task into work units. A work unit is the smallest change that
    leaves the code in a working state: it builds, and the existing tests
    pass. One work unit is one commit.
 

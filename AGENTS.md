@@ -77,6 +77,16 @@ Put each skill in its own directory: `skills/<skill-name>/SKILL.md`. Do not
 nest skills inside other skills. Do not put a `SKILL.md` at the repository
 root.
 
+### README
+
+The "Skills" table in `README.md` lists every packaged skill. When you add,
+rename, or remove a skill in `skills/`, or change what it does, update its
+row in the same commit. A row has the skill name, one line on what it does,
+the source, and the license. For an original skill, the source is
+`Young Zhang, [young-zhang/skills](https://github.com/young-zhang/skills)`.
+For an adapted skill, it is the upstream author with a link to the upstream
+repository.
+
 ### Portable skill names
 
 Follow the Agent Skills specification

@@ -33,7 +33,16 @@ If there is no target:
   last commit, the commits not yet pushed (`@{upstream}..HEAD`), and a
   custom range.
 
-Record the target and the base commit. Every later step uses the same target.
+The fixes go into the working tree, so the target must end at the
+checked-out `HEAD`. For a pull request, merge request, or branch, its head
+branch must be the branch that is checked out. If the target ends somewhere
+else, ask the user. Do not switch branches yourself.
+
+Record the target and the base commit. For a pull request or merge request,
+fetch its target branch from the repository that it targets, which can be a
+remote other than `origin`: `git fetch <remote> <target branch>`. The base
+commit is then `git merge-base FETCH_HEAD HEAD`. A local target branch can
+be out of date and give a wrong base. Every later step uses the same target.
 
 ## 2. Ponytail review at the ultra level
 
@@ -48,15 +57,21 @@ Record the target and the base commit. Every later step uses the same target.
 Invoke the `duel-review` skill on the target as it is now, after the fixes
 from step 2.
 
-`duel-review` fetches a GitHub pull request with `gh`, or a GitLab merge
-request with `glab`. If the target is neither, replace its fetch step with
-these commands, and keep every other step:
+`duel-review` fetches the diff of a pull request with `gh` or of a merge
+request with `glab`. That remote diff does not include the fixes from step 2,
+which are not pushed. Take the diff from the local checkout in its place, and
+keep every other step:
 
 ```sh
-git log --format='%h %s%n%n%b' <base>..HEAD   # stands in for the PR title and description
-git diff <base>..HEAD                         # committed changes
-git diff HEAD                                 # uncommitted changes, if any
+git diff <base>                               # committed and uncommitted changes
+git status --short --untracked-files=all      # new files, marked ??, that git diff leaves out
+git log --format='%h %s%n%n%b' <base>..HEAD   # title and description, if the target is not a PR or MR
 ```
+
+Give the review the contents of each new file that belongs to the change.
+
+For a pull request or merge request, take only the title and description
+from `gh` or `glab`.
 
 Then decide on each merged finding, make the fixes, and run the tests and
 checks again.

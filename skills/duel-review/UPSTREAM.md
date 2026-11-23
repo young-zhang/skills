@@ -36,8 +36,18 @@ by Roman Pronskiy (<https://pronskiy.com>).
     merge request number or a branch, not a link, so for a link the step
     passes the number and `-R <project URL>`. These commands were checked
     with glab 1.130.0.
-- The rest of `SKILL.md` is unchanged. Its `description` field and "When to
-  use" still name the Watchdog, which this repository does not include.
+  - "Quick reference": the Fetch row names `gh` or `glab`, in place of
+    `gh` only.
+- `SKILL.md`: removed every reference to the Watchdog, because this
+  repository does not include it. Upstream says in two places that the skill
+  is not for reviewing local uncommitted changes, which is the Watchdog's
+  job.
+  - `description`: removed "reviewing local uncommitted changes (that is the
+    Watchdog) or for". The sentence is now "Not for planning (use
+    duel-plan)."
+  - "When to use": removed "reviewing your own local uncommitted changes
+    (that is the Watchdog hook);" from the "Not for" line.
+- The rest of `SKILL.md` is unchanged.
 - Not copied: the upstream plugin manifest
   (`plugins/fusion-harness/.claude-plugin/plugin.json`) and the Watchdog
   feature (`commands/watchdog.md`, `hooks/hooks.json`, and `scripts/`). The
