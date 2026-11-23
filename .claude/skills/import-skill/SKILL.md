@@ -7,5 +7,5 @@ disable-model-invocation: true
 
 Read `.agents/skills/import-skill/SKILL.md` at the repository root and follow
 its instructions, with the arguments given to this skill as the request. That
-file is the only copy of this skill. Codex CLI and Antigravity load it from
-`.agents/skills/`, and Claude Code loads this file.
+file is the only copy of this skill. Codex CLI, Antigravity, and Copilot CLI
+load it from `.agents/skills/`, and Claude Code loads this file.

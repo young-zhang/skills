@@ -1,8 +1,8 @@
 # Young's Skills
 
 A portable collection of agent skills and utilities for Claude Code, Codex
-CLI, and Google Antigravity. The repository packages one plugin, `yz`, for all
-three harnesses. Each skill follows the
+CLI, Google Antigravity, and GitHub Copilot CLI. The repository packages one
+plugin, `yz`, for all four harnesses. Each skill follows the
 [Agent Skills specification](https://agentskills.io/specification) and lives
 at `skills/<skill-name>/SKILL.md`.
 
@@ -26,6 +26,7 @@ A skill copied from another project records its source and changes in
 | Claude Code | `yz`   | `young-zhang-skills` |
 | Codex CLI   | `yz`   | `young-zhang-skills` |
 | Antigravity | `yz`   | none (GitHub URL)    |
+| Copilot CLI | `yz`   | `young-zhang-skills` |
 
 Versions use the form `yy.ddd.n`. See
 [AGENTS.md](AGENTS.md#versions-and-releases) for the rule.
@@ -80,13 +81,42 @@ prefix:
 Antigravity also loads a skill on its own when a request matches the skill
 description. Run `agy plugin list` to see the installed plugins.
 
+### GitHub Copilot CLI
+
+Copilot CLI has no manifest of its own in this repository. It reads the Claude
+Code files `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`.
+Run these commands in the shell:
+
+```sh
+copilot plugin marketplace add young-zhang/skills
+copilot plugin install yz@young-zhang-skills
+```
+
+Inside a session, `/plugin marketplace add young-zhang/skills` and
+`/plugin install yz@young-zhang-skills` do the same. Start a new session. Then
+invoke a skill with its plugin prefix:
+
+```text
+/yz:skill-name
+```
+
+Slash commands run only in an interactive session. `copilot -p` passes
+`/yz:skill-name` to the model as plain text and does not load the skill. Type
+`/skills list` in a session, or run `copilot skill list` in the shell, to see
+the loaded skills. Run `copilot plugin list` to see the installed plugins.
+
+`copilot plugin install young-zhang/skills` also installs the plugin, without
+a marketplace. Copilot CLI marks this direct install as deprecated, so use the
+marketplace commands above.
+
 ## Release changes
 
 1. Change or add skills under `skills/`.
 2. Set the next `yy.ddd.n` version in all three manifests in the same commit:
    `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, and
    `.antigravity-plugin/plugin.json`. Claude Code keeps every user on the
-   cached copy until this string changes, even after new commits.
+   cached copy until this string changes, even after new commits. Copilot CLI
+   reads the version in `.claude-plugin/plugin.json`.
 3. Run the checks in [AGENTS.md](AGENTS.md#checks-before-a-commit).
 4. Commit and push to the default branch on GitHub.
 
@@ -143,6 +173,26 @@ agy plugin install https://github.com/young-zhang/skills
 
 Run `agy plugin list` to confirm the new version.
 
+### Update in Copilot CLI
+
+Run these commands in the shell, then start a new session:
+
+```sh
+copilot plugin marketplace update young-zhang-skills
+copilot plugin update yz@young-zhang-skills
+```
+
+The first command refreshes the marketplace listing. The second command
+installs the new version. `copilot plugin update --all` updates every
+installed plugin. In a session, the `/plugin` dashboard marks a plugin that has
+a newer version and offers an **Update** action. Run `copilot plugin list` to
+confirm the new version.
+
+Copilot CLI updates only its built-in `awesome-copilot` marketplace
+automatically. To update this marketplace at the start of each session, set
+`autoUpdate: true` on its entry in `extraKnownMarketplaces` in your Copilot
+CLI user settings (`~/.copilot/settings.json`).
+
 ## Uninstall
 
 ### Uninstall from Codex CLI
@@ -172,6 +222,22 @@ The command removes the plugin and its copy in `~/.gemini/config/plugins/yz/`.
 Antigravity has no marketplace entry to remove for a plugin installed from a
 GitHub URL. Run `agy plugin list` to confirm that `yz` is gone.
 
+### Uninstall from Copilot CLI
+
+Run these commands in the shell, in this order:
+
+```sh
+copilot plugin uninstall yz@young-zhang-skills
+copilot plugin marketplace remove young-zhang-skills
+```
+
+The first command uninstalls the plugin and its skills. The second command
+removes the marketplace. Copilot CLI refuses to remove a marketplace while a
+plugin from it is still installed. `copilot plugin marketplace remove
+young-zhang-skills --force` removes the marketplace and uninstalls its plugins
+in one step. To turn the plugin off without removing it, run
+`copilot plugin disable yz@young-zhang-skills`.
+
 ## Local development
 
 The plugin needs no links. Every manifest uses the real `skills/` directory
@@ -188,15 +254,25 @@ the repository root:
 - Antigravity: `agy plugin install .` copies the plugin into the Antigravity
   profile. After you edit a skill, run the command again. Antigravity replaces
   the installed copy.
+- Copilot CLI: `copilot --plugin-dir .` loads the working copy for that
+  session only. `copilot --plugin-dir . plugin list` shows it under "External
+  Plugins (via --plugin-dir)". To keep it installed instead, run
+  `copilot plugin marketplace add .`, then
+  `copilot plugin install yz@young-zhang-skills`. Copilot CLI does not copy a
+  plugin from a local marketplace. It loads the skills from the working copy,
+  so an edit takes effect in the next session.
 
 Codex keeps one marketplace per name. If the GitHub marketplace is already
 configured, run `codex plugin marketplace remove young-zhang-skills` before
 you add the local path, and add the GitHub source again when you are done.
+Copilot CLI also registers a marketplace by its name, so do the same with
+`copilot plugin marketplace remove young-zhang-skills --force`.
 
 To use one skill outside the plugin, without the `yz` prefix, link its
 directory into a harness skills directory. The examples use the Claude Code
 personal skills directory. Codex CLI reads `~/.agents/skills/`. The
-Antigravity CLI reads `~/.gemini/config/skills/`.
+Antigravity CLI reads `~/.gemini/config/skills/`. Copilot CLI reads
+`~/.copilot/skills/` and `~/.agents/skills/`.
 
 macOS and Linux:
 
@@ -237,6 +313,14 @@ third-party skills.
 - Antigravity plugins: <https://antigravity.google/docs/plugins/>
 - Antigravity plugin manifest: <https://antigravity.google/docs/build-plugins/>
 - Antigravity skills: <https://antigravity.google/docs/skills/>
+- Copilot CLI plugin reference:
+  <https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference>
+- Copilot CLI plugin creation:
+  <https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating>
+- Copilot CLI plugin marketplaces:
+  <https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-marketplace>
+- Copilot CLI skills:
+  <https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills>
 
 ## License
 

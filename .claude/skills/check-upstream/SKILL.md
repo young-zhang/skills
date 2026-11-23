@@ -5,5 +5,6 @@ disable-model-invocation: true
 ---
 
 Read `.agents/skills/check-upstream/SKILL.md` at the repository root and follow
-its instructions. That file is the only copy of this skill. Codex CLI and
-Antigravity load it from `.agents/skills/`, and Claude Code loads this file.
+its instructions. That file is the only copy of this skill. Codex CLI,
+Antigravity, and Copilot CLI load it from `.agents/skills/`, and Claude Code
+loads this file.

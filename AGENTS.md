@@ -1,32 +1,40 @@
 # Contributor Instructions
 
 This repository is Young's Skills. It packages one plugin, `yz`, for Claude
-Code, Codex CLI, and Google Antigravity. All three harnesses load the same
-`skills/` directory at the repository root. These instructions apply to every
-agent and person that changes the repository.
+Code, Codex CLI, Google Antigravity, and GitHub Copilot CLI. All four
+harnesses load the same `skills/` directory at the repository root. These
+instructions apply to every agent and person that changes the repository.
 
 ## Repository layout
 
-| Path                               | Purpose                                         |
-| ---------------------------------- | ----------------------------------------------- |
-| `skills/<skill-name>/SKILL.md`     | One packaged skill.                             |
-| `.claude-plugin/plugin.json`       | Claude Code plugin manifest.                    |
-| `.claude-plugin/marketplace.json`  | Claude Code marketplace `young-zhang-skills`.   |
-| `.codex-plugin/plugin.json`        | Codex CLI plugin manifest.                      |
-| `.agents/plugins/marketplace.json` | Codex CLI marketplace `young-zhang-skills`.     |
-| `.antigravity-plugin/plugin.json`  | Antigravity plugin manifest.                    |
-| `AGENTS.md`                        | These shared instructions.                      |
-| `CLAUDE.md`                        | Imports `AGENTS.md` for Claude Code.            |
-| `.agents/skills/<name>/SKILL.md`   | Repository-only skill. Not packaged.            |
-| `.claude/skills/<name>/SKILL.md`   | Claude Code pointer to a repository-only skill. |
-| `.env.example`                     | Template for `.env`: local upstream checkouts.  |
+| Path                               | Purpose                                                       |
+| ---------------------------------- | ------------------------------------------------------------- |
+| `skills/<skill-name>/SKILL.md`     | One packaged skill.                                           |
+| `.claude-plugin/plugin.json`       | Claude Code and Copilot CLI plugin manifest.                  |
+| `.claude-plugin/marketplace.json`  | Claude Code and Copilot CLI marketplace `young-zhang-skills`. |
+| `.codex-plugin/plugin.json`        | Codex CLI plugin manifest.                                    |
+| `.agents/plugins/marketplace.json` | Codex CLI marketplace `young-zhang-skills`.                   |
+| `.antigravity-plugin/plugin.json`  | Antigravity plugin manifest.                                  |
+| `AGENTS.md`                        | These shared instructions.                                    |
+| `CLAUDE.md`                        | Imports `AGENTS.md` for Claude Code.                          |
+| `.agents/skills/<name>/SKILL.md`   | Repository-only skill. Not packaged.                          |
+| `.claude/skills/<name>/SKILL.md`   | Claude Code pointer to a repository-only skill.               |
+| `.env.example`                     | Template for `.env`: local upstream checkouts.                |
 
-The repository root is the plugin root for all three harnesses. Each manifest
+The repository root is the plugin root for all four harnesses. Each manifest
 refers to `skills/` with a relative path or with the harness default:
 
-- Claude Code and Codex CLI: `"skills": "./skills/"`.
+- Claude Code, Codex CLI, and Copilot CLI: `"skills": "./skills/"`.
 - Antigravity: no `skills` field. Antigravity always loads `skills/` at the
   plugin root, and its `skills` field only adds extra directories.
+
+Copilot CLI has no manifest of its own here. It looks for a plugin manifest at
+`.plugin/plugin.json`, `plugin.json`, `.github/plugin/plugin.json`, and
+`.claude-plugin/plugin.json`, in this order, and uses the first one it finds.
+It looks for a marketplace at `marketplace.json`, `.plugin/marketplace.json`,
+`.github/plugin/marketplace.json`, and `.claude-plugin/marketplace.json`, in
+the same way. Do not add a file at any of the earlier paths. Copilot CLI would
+read it in place of the `.claude-plugin/` file.
 
 Do not add a second directory of packaged skills, a copy of a skill, or a
 symbolic link to a skill. A new directory under `skills/` is packaged for
@@ -42,16 +50,23 @@ are not packaged in the `yz` plugin:
 | `check-upstream` | Compares copied skills with their upstream source and offers updates.       |
 | `import-skill`   | Imports a third-party skill with the steps in "Adapted third-party skills". |
 
-Each one lives at `.agents/skills/<name>/SKILL.md`. Codex CLI and Antigravity
-load skills from `.agents/skills/` in the workspace. Claude Code does not, so
-each skill also has a short pointer at `.claude/skills/<name>/SKILL.md`. The
-pointer has the same frontmatter and one instruction: read and follow the
-file in `.agents/skills/`. Keep the full instructions only in `.agents/skills/`.
+Each one lives at `.agents/skills/<name>/SKILL.md`. Codex CLI, Antigravity,
+and Copilot CLI load skills from `.agents/skills/` in the workspace. Claude
+Code does not, so each skill also has a short pointer at
+`.claude/skills/<name>/SKILL.md`. The pointer has the same frontmatter and one
+instruction: read and follow the file in `.agents/skills/`. Keep the full
+instructions only in `.agents/skills/`.
 
-Invoke them as `/<name>` in Claude Code and Antigravity, and as `$<name>` in
-Codex CLI. A skill that must run only when invoked sets
-`disable-model-invocation: true` in its frontmatter (Claude Code and
-Antigravity) and has `agents/openai.yaml` with
+Copilot CLI also reads `.claude/skills/`. It reads `.agents/skills/` first and
+keeps the first skill it finds for each name, so it uses the full
+instructions and skips the pointer. Keep the `name` field of the pointer equal
+to the `name` field of the full skill, or Copilot CLI loads both.
+
+Invoke them as `/<name>` in Claude Code, Antigravity, and Copilot CLI, and as
+`$<name>` in Codex CLI. In Copilot CLI, slash commands run only in an
+interactive session, not with `copilot -p`. A skill that must run only when
+invoked sets `disable-model-invocation: true` in its frontmatter (Claude Code,
+Antigravity, and Copilot CLI) and has `agents/openai.yaml` with
 `policy: allow_implicit_invocation: false` (Codex CLI).
 
 ## Skills
@@ -71,8 +86,9 @@ harness:
 - Use 1 to 64 characters: lowercase letters `a-z`, digits `0-9`, and hyphens.
 - Do not start or end the name with a hyphen. Do not use two hyphens in a row.
 - Make the `name` field in the frontmatter equal to the directory name.
-- Pick a distinct name. Claude Code shows the skill as `/yz:<skill-name>` and
-  Codex CLI shows it as `yz:<skill-name>`, but Antigravity shows it as
+- Pick a distinct name. Claude Code and Copilot CLI show the skill as
+  `/yz:<skill-name>` and Codex CLI shows it as `yz:<skill-name>`, but
+  Antigravity shows it as
   `/<skill-name>` with no plugin prefix. A generic name such as `review`,
   `help`, `init`, `plugin`, or `skills` can collide with a built-in command or
   another plugin in Antigravity.
@@ -168,7 +184,7 @@ by hand:
 The three plugin manifests carry the same `version`. Change all three in the
 same commit:
 
-- `.claude-plugin/plugin.json`
+- `.claude-plugin/plugin.json` (also read by Copilot CLI)
 - `.codex-plugin/plugin.json`
 - `.antigravity-plugin/plugin.json`
 
@@ -210,6 +226,10 @@ node -e "for (const f of ['.claude-plugin/plugin.json','.claude-plugin/marketpla
 ```
 
 If Antigravity is installed, also run `agy plugin validate .`.
+
+If Copilot CLI is installed, also run `copilot --plugin-dir . plugin list`.
+Copilot CLI has no validate command. The output must list `yz` with the new
+version under "External Plugins (via --plugin-dir)".
 
 `claude plugin validate .` reports a warning that `CLAUDE.md` at the plugin
 root is not loaded as plugin context. `agy plugin validate .` reports a

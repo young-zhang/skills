@@ -95,8 +95,9 @@ If several match, list them and ask the user to pick.
 5. Find required notices: `NOTICE*` files in `<dir>` and at the repository
    root, and copyright or attribution lines in the skill files.
 6. Find what a portable copy needs. Report each item:
-   - `disable-model-invocation: true` in the frontmatter: Codex CLI ignores
-     it, so the import adds `agents/openai.yaml` with
+   - `disable-model-invocation: true` in the frontmatter: Claude Code,
+     Antigravity, and Copilot CLI honor it. Codex CLI ignores it, so the
+     import adds `agents/openai.yaml` with
      `policy: allow_implicit_invocation: false`.
    - Frontmatter fields outside the Agent Skills specification. Keep them.
      Report the ones a harness ignores.
