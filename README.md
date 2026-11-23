@@ -90,7 +90,12 @@ description. Run `agy plugin list` to see the installed plugins.
 3. Run the checks in [AGENTS.md](AGENTS.md#checks-before-a-commit).
 4. Commit and push to the default branch on GitHub.
 
-## Refresh an install on another machine
+## Update
+
+Run these steps on each machine that has the plugin installed, after you push
+a new version.
+
+### Update in Claude Code
 
 Claude Code does not update third-party marketplaces automatically by
 default. Run these commands in the shell, then run `/reload-plugins` in an
@@ -106,15 +111,27 @@ installs the new version. To enable automatic updates for this marketplace,
 open `/plugin` in a session, go to the Marketplaces tab, and enable
 auto-update.
 
-Codex CLI: run this command in the shell, then start a new session:
+### Update in Codex CLI
+
+Run this command in the shell, then start a new session:
 
 ```sh
 codex plugin marketplace upgrade young-zhang-skills
 ```
 
 The command fetches the latest marketplace snapshot from GitHub and refreshes
-the installed plugin from it. If a skill still shows its old text, run
-`codex plugin add yz@young-zhang-skills` again to copy the plugin again.
+the installed plugin from it. If a skill still shows its old text, copy the
+plugin again:
+
+```sh
+codex plugin add yz@young-zhang-skills
+```
+
+`upgrade` works only for a marketplace added from GitHub. For a marketplace
+added from a local path, run `codex plugin add yz@young-zhang-skills` instead.
+Run `codex plugin list` to confirm the new version.
+
+### Update in Antigravity
 
 Antigravity has no update command for a plugin installed from a GitHub URL.
 Run the install command again in the shell. Antigravity replaces the
@@ -125,6 +142,35 @@ agy plugin install https://github.com/young-zhang/skills
 ```
 
 Run `agy plugin list` to confirm the new version.
+
+## Uninstall
+
+### Uninstall from Codex CLI
+
+Run these commands in the shell, in this order:
+
+```sh
+codex plugin remove yz@young-zhang-skills
+codex plugin marketplace remove young-zhang-skills
+```
+
+The first command uninstalls the plugin and deletes its cached copy. The
+second command removes the marketplace. Removing only the marketplace leaves
+the `yz` plugin entry in `~/.codex/config.toml` and its copy in
+`~/.codex/plugins/cache/`. Run `codex plugin marketplace list` to check what
+is still configured.
+
+### Uninstall from Antigravity
+
+Run this command in the shell:
+
+```sh
+agy plugin uninstall yz
+```
+
+The command removes the plugin and its copy in `~/.gemini/config/plugins/yz/`.
+Antigravity has no marketplace entry to remove for a plugin installed from a
+GitHub URL. Run `agy plugin list` to confirm that `yz` is gone.
 
 ## Local development
 
