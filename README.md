@@ -12,9 +12,15 @@ replace `skill-name` with the name of a skill from the list below.
 
 ## Skills
 
-| Skill      | What it does                                                          | Source                                                                | License |
-| ---------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | ------- |
-| `reprompt` | Rewrites a prompt to be more ambitious. Runs only when you invoke it. | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills) | MIT     |
+| Skill             | What it does                                                             | Source                                                                                | License |
+| ----------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------- |
+| `reprompt`        | Rewrites a prompt to be more ambitious. Runs only when you invoke it.    | Roman Pronskiy, [pronskiy/skills](https://github.com/pronskiy/skills)                 | MIT     |
+| `ponytail`        | Makes the agent write the smallest change that fully solves the task.    | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `ponytail-review` | Reviews a change for bugs, security, load, tests, speed, and extra code. | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `ponytail-audit`  | Reviews a whole repository for the same problems as `ponytail-review`.   | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `ponytail-debt`   | Lists every `shortcut:` comment as a ledger of deferred work.            | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `ponytail-gain`   | Shows the savings that the upstream ponytail benchmark measured.         | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
+| `ponytail-help`   | Shows a quick reference for the ponytail skills and levels.              | DietrichGebert, [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | MIT     |
 
 A skill copied from another project records its source and changes in
 `UPSTREAM.md` in its own directory.
