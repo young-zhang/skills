@@ -7,16 +7,19 @@ agent and person that changes the repository.
 
 ## Repository layout
 
-| Path                               | Purpose                                       |
-| ---------------------------------- | --------------------------------------------- |
-| `skills/<skill-name>/SKILL.md`     | One skill. The only place skills live.        |
-| `.claude-plugin/plugin.json`       | Claude Code plugin manifest.                  |
-| `.claude-plugin/marketplace.json`  | Claude Code marketplace `young-zhang-skills`. |
-| `.codex-plugin/plugin.json`        | Codex CLI plugin manifest.                    |
-| `.agents/plugins/marketplace.json` | Codex CLI marketplace `young-zhang-skills`.   |
-| `.antigravity-plugin/plugin.json`  | Antigravity plugin manifest.                  |
-| `AGENTS.md`                        | These shared instructions.                    |
-| `CLAUDE.md`                        | Imports `AGENTS.md` for Claude Code.          |
+| Path                               | Purpose                                         |
+| ---------------------------------- | ----------------------------------------------- |
+| `skills/<skill-name>/SKILL.md`     | One packaged skill.                             |
+| `.claude-plugin/plugin.json`       | Claude Code plugin manifest.                    |
+| `.claude-plugin/marketplace.json`  | Claude Code marketplace `young-zhang-skills`.   |
+| `.codex-plugin/plugin.json`        | Codex CLI plugin manifest.                      |
+| `.agents/plugins/marketplace.json` | Codex CLI marketplace `young-zhang-skills`.     |
+| `.antigravity-plugin/plugin.json`  | Antigravity plugin manifest.                    |
+| `AGENTS.md`                        | These shared instructions.                      |
+| `CLAUDE.md`                        | Imports `AGENTS.md` for Claude Code.            |
+| `.agents/skills/<name>/SKILL.md`   | Repository-only skill. Not packaged.            |
+| `.claude/skills/<name>/SKILL.md`   | Claude Code pointer to a repository-only skill. |
+| `.env.example`                     | Template for `.env`: local upstream checkouts.  |
 
 The repository root is the plugin root for all three harnesses. Each manifest
 refers to `skills/` with a relative path or with the harness default:
@@ -25,9 +28,31 @@ refers to `skills/` with a relative path or with the harness default:
 - Antigravity: no `skills` field. Antigravity always loads `skills/` at the
   plugin root, and its `skills` field only adds extra directories.
 
-Do not add a second skills directory, a copy of a skill, or a symbolic link to
-a skill. A new directory under `skills/` is packaged for every harness with no
-manifest change.
+Do not add a second directory of packaged skills, a copy of a skill, or a
+symbolic link to a skill. A new directory under `skills/` is packaged for
+every harness with no manifest change.
+
+## Repository-only skills
+
+Some skills help maintain this repository and are not for plugin users. They
+are not packaged in the `yz` plugin:
+
+| Skill            | What it does                                                                |
+| ---------------- | --------------------------------------------------------------------------- |
+| `check-upstream` | Compares copied skills with their upstream source and offers updates.       |
+| `import-skill`   | Imports a third-party skill with the steps in "Adapted third-party skills". |
+
+Each one lives at `.agents/skills/<name>/SKILL.md`. Codex CLI and Antigravity
+load skills from `.agents/skills/` in the workspace. Claude Code does not, so
+each skill also has a short pointer at `.claude/skills/<name>/SKILL.md`. The
+pointer has the same frontmatter and one instruction: read and follow the
+file in `.agents/skills/`. Keep the full instructions only in `.agents/skills/`.
+
+Invoke them as `/<name>` in Claude Code and Antigravity, and as `$<name>` in
+Codex CLI. A skill that must run only when invoked sets
+`disable-model-invocation: true` in its frontmatter (Claude Code and
+Antigravity) and has `agents/openai.yaml` with
+`policy: allow_implicit_invocation: false` (Codex CLI).
 
 ## Skills
 
@@ -103,7 +128,11 @@ skills/<skill-name>/
 
 The MIT license in `LICENSE` covers only original work in this repository. A
 skill copied or adapted from another project stays under its upstream license.
-Before you add one:
+`/import-skill <description>` does the steps below and asks you to confirm the
+plan before it writes any file. Describe the skill in plain text and give the
+path of your local checkout if you have one, for example
+`/import-skill the reprompt skill from G:/github/pronskiy-skills`. To add one
+by hand:
 
 1. Confirm that the upstream license allows redistribution and modification.
    Do not add a skill that has no license or a license that forbids this.
@@ -114,14 +143,24 @@ Before you add one:
    example, requires that you keep the `NOTICE` text.
 4. Keep every copyright, author, and attribution line from the upstream
    files. Do not remove or change them.
-5. Add `UPSTREAM.md` to the skill directory. Record the upstream repository
-   URL, the commit SHA or release you copied from, the SPDX license
-   identifier, and a list of the changes you made.
-6. Follow any rule in the upstream license about changed files. The Apache
+5. Add `UPSTREAM.md` to the skill directory. `/check-upstream` reads it, so
+   use these labels as list items: `Repository:` (the Git URL),
+   `Source path:` (the upstream path of the skill's `SKILL.md`), `Commit:`
+   (the full commit SHA you copied from), `License:` (the SPDX license
+   identifier), and `Checkout key:` (the `.env` key for the repository, in
+   the form `UPSTREAM_<OWNER>_<REPO>` that `.env.example` explains). Under a
+   `## Changes` heading, list every change you made. See
+   `skills/reprompt/UPSTREAM.md` for an example.
+6. If `.env.example` has no line for the checkout key, add one: a comment
+   with the repository URL and the skills that use it, then the key with no
+   value. Each person copies `.env.example` to `.env` (not committed) and sets
+   the paths of their local checkouts, so `/check-upstream` can use them
+   instead of a temporary clone.
+7. Follow any rule in the upstream license about changed files. The Apache
    License 2.0, section 4(b), requires a prominent notice in each modified
    file that states that you changed it. A list in `UPSTREAM.md` alone does
    not meet that rule.
-7. Set the `license` frontmatter field in `SKILL.md`, for example
+8. Set the `license` frontmatter field in `SKILL.md`, for example
    `license: Apache-2.0 (see LICENSE)`.
 
 ## Versions and releases

@@ -7,6 +7,8 @@ This skill is copied from the `reprompt` plugin by Roman Pronskiy
 - Source path: `plugins/reprompt/skills/reprompt/SKILL.md`
 - Commit: `4c3ee60d486e83bd14d4b12699f3c4cbe14b15bf` (2026-10-15)
 - License: MIT. The upstream license text is in `LICENSE` in this directory.
+- Checkout key: `UPSTREAM_PRONSKIY_SKILLS`. Set it in `.env` to the path of a
+  local checkout of the repository. See `.env.example`.
 
 ## Changes
 
