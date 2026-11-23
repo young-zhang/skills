@@ -1,6 +1,6 @@
 ---
 name: duel-review
-description: Use when you want two agents to review a pull request and challenge each other before you act on it — give a PR link (or number/branch) and Claude and the Codex CLI each review it independently, then debate the findings. Triggers like "duel review", "duel review this PR", "have Claude and Codex review this pull request", "review this PR with Codex", "two-agent PR review". Requires the codex and gh CLIs installed and authenticated. Not for reviewing local uncommitted changes (that is the Watchdog) or for planning (use duel-plan).
+description: Use when you want two agents to review a pull request (GitHub) or merge request (GitLab) and challenge each other before you act on it — give a PR or MR link (or number/branch) and Claude and the Codex CLI each review it independently, then debate the findings. Triggers like "duel review", "duel review this PR", "duel review this MR", "have Claude and Codex review this pull request", "review this PR with Codex", "two-agent PR review". Requires the codex CLI, plus gh for GitHub or glab for GitLab, installed and authenticated. Not for reviewing local uncommitted changes (that is the Watchdog) or for planning (use duel-plan).
 license: MIT (see LICENSE)
 ---
 
@@ -16,7 +16,7 @@ Two independent agents review a pull request and challenge each other. Claude an
 **Not for:** reviewing your own local uncommitted changes (that is the Watchdog hook); planning a change (use the `duel-plan` skill).
 
 ## Prerequisites
-The `codex` and `gh` CLIs must both be installed and authenticated (`codex login`, `gh auth status`). If either is missing, tell the user and stop. **Codex is stateless across calls**, so every call must carry the full debate so far.
+The `codex` CLI must be installed and authenticated (`codex login`). For a GitHub pull request, the `gh` CLI must be installed and authenticated (`gh auth status`). For a GitLab merge request, the `glab` CLI must be installed and authenticated (`glab auth status`). If a required CLI is missing, tell the user and stop. **Codex is stateless across calls**, so every call must carry the full debate so far.
 
 Run `codex exec` with stdin redirected from `/dev/null`. If stdin stays open, Codex waits to read from it and stops responding.
 
@@ -24,10 +24,17 @@ Run `codex exec` with stdin redirected from `/dev/null`. If stdin stays open, Co
 `blocker` (must fix before merge) · `major` (should fix) · `minor` (nice to fix) · `nit` (style/preference). Each finding: severity, `file:line`, and a one-line rationale.
 
 ## Procedure
-1. **Fetch the PR.** Use the link/number/branch the user gave:
+1. **Fetch the PR.** Use the link/number/branch the user gave. Pick the CLI from the link, or else from the host of the `origin` remote (`git remote get-url origin`): GitHub → `gh`, GitLab (gitlab.com or a self-hosted GitLab) → `glab`. If the host is not clear, ask the user.
+
+   GitHub pull request:
    ```bash
    gh pr view  <pr> --json title,body,author,baseRefName,headRefName
    gh pr diff  <pr> --patch
+   ```
+   GitLab merge request (`glab` takes an MR number or a branch, not a link; for a link, pass the number and `-R <project URL>`):
+   ```bash
+   glab mr view <mr> --output json --jq '{title, description, author: .author.username, target_branch, source_branch}'
+   glab mr diff <mr> --raw
    ```
    Keep the diff for the next steps; if it is very large, trim to the substantive hunks and say so.
 2. **Review A (you).** Independently review the diff. Produce findings in the severity format above. Don't look at Codex's review first.
