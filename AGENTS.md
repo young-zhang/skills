@@ -198,19 +198,36 @@ same commit:
 - `.codex-plugin/plugin.json`
 - `.antigravity-plugin/plugin.json`
 
-Every commit sets a new version of the form `yy.ddd.n`:
+A version has the form `yy.ddd.n`:
 
 - `yy` is the last two digits of the year, for example `26` for 2026.
 - `ddd` is the day of the year, counted from `0` for January 1. November 22,
   2026 is `325`.
-- `n` counts the commits made on that day, starting from `0`. The first
-  commit of the day is `0`, the next is `1`, and so on.
+- `n` counts the versions that reach `master` on that day, starting from `0`.
+  The first version of the day is `0`, the next is `1`, and so on.
 
-Use the local date of the commit. If the current version already starts with
-today's `yy.ddd`, increase `n` by one. If not, set `n` to `0`. Do not add
-leading zeros: write `26.4.0` for January 5, 2026, not `26.004.0`. Leading
-zeros are not valid in Semantic Versioning, which Antigravity recommends for
-`version`.
+When to set a new version:
+
+- A commit that you make directly on `master` sets a new version.
+- On any other branch, do not change the version while you work. The
+  manifests keep the version that `master` has. Set the new version once, in
+  the last commit before you open the pull request or merge request into
+  `master`. The branch commits and the merge commit do not each need a new
+  version: the branch brings one new version to `master`.
+- If you add commits after the pull request or merge request is open, check
+  the version again before the merge.
+
+How to work out the new version: compare the version on `master` with the
+local date of the commit. Do not compare with the version on your branch.
+
+- If the version on `master` starts with today's `yy.ddd`, keep that
+  `yy.ddd` and set `n` to the `n` of `master` plus one.
+- If not, use today's `yy.ddd` and set `n` to `0`.
+
+A second check on the same day, with no change on `master`, gives the same
+version, so the version on the branch stays as it is. Do not add leading
+zeros: write `26.4.0` for January 5, 2026, not `26.004.0`. Leading zeros are
+not valid in Semantic Versioning, which Antigravity recommends for `version`.
 
 To print today's `yy.ddd`:
 
@@ -238,8 +255,8 @@ node -e "for (const f of ['.claude-plugin/plugin.json','.claude-plugin/marketpla
 If Antigravity is installed, also run `agy plugin validate .`.
 
 If Copilot CLI is installed, also run `copilot --plugin-dir . plugin list`.
-Copilot CLI has no validate command. The output must list `yz` with the new
-version under "External Plugins (via --plugin-dir)".
+Copilot CLI has no validate command. The output must list `yz` with the
+version in the manifests under "External Plugins (via --plugin-dir)".
 
 `claude plugin validate .` reports a warning that `CLAUDE.md` at the plugin
 root is not loaded as plugin context. `agy plugin validate .` reports a
