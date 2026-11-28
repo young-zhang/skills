@@ -60,12 +60,12 @@ varying"; "this point earns its keep" for "this point still matters"; "the
 parser owns validation" for "the parser validates input". The reader must
 translate each one, and a metaphor adds meanings the writer did not choose.
 
-Say what you mean. When a literal phrase is available, use it. This applies to
-prose that you write, in every register, chat included. It does not apply to
-quoted text, or to a term that is the standard word for a thing, such as
-"branch", "bug", or "deadlock". Before you send or save prose, rewrite each
-figurative phrase as a literal statement. Do not replace one metaphor with
-another.
+Do not write mannered prose. Say what you mean. When a literal phrase is
+available, use it. This applies to prose that you write, in every register,
+chat included. It does not apply to quoted text, or to a term that is the
+standard word for a thing, such as "branch", "bug", or "deadlock". Before you
+send or save prose, rewrite each metaphor, flourish, or coined label as a
+literal statement. Do not replace one metaphor with another.
 
 Technical terms:
 - Use a technical term only in its standard, accepted meaning, and only when a
