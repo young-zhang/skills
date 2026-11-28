@@ -72,7 +72,7 @@ Technical terms:
   plain word does not work. The reader knows the exact meaning and notices
   misuse. For example, "in-band" and "out-of-band" are networking and
   signaling terms about whether control shares the data channel. They do not
-  describe database sessions, connections, threads, or config.
+  describe database sessions, connections, threads, config, or anything else.
 - Do not use a term or abbreviation that you made up during the work. Say what
   the thing is.
 - Define a technical term in plain words the first time it appears.
@@ -81,11 +81,10 @@ Keep exact: code, identifiers, file paths, SQL, config keys, topic names, API
 names, and anything a compiler or tool reads. The plain-language rules apply to
 prose only, never to these.
 
-Words and phrases to avoid in prose that you write, in every register including
-chat. Use the plain replacement. The list is not complete: most entries are
-examples of mannered prose, and the rules above cover phrases that are not
-listed. The list does not apply to quoted text or to a word that is under
-discussion:
+Do not use these words and phrases in prose that you write, in any register,
+chat included. Use the plain replacement. The list is not complete: the rules
+above cover phrases of the same kind that are not listed. The list does not
+apply to quoted text or to a word that is under discussion:
 - "steelman" / "steel-man" / "steel man" -> "the strongest form of the
   argument".
 - "land" (a change "lands") -> merged, committed, deployed, or completed.
@@ -105,7 +104,7 @@ discussion:
 - internet reasoning slang ("touch grass", "based", "cope", "vibe", "fr fr", "no
   cap") -> say the plain thing.
 
-Also banned in every register: emojis, unless the user asks for them; the em
+Banned in every register: emojis, unless the user asks for them; the em
 dash (use `--`); and the en dash (use `-`).
 
 ## Spelling -- American English only
@@ -138,8 +137,8 @@ to:
 
 - Refactor, extraction, or migration history ("added in this PR", "pure move
   from foo.py during the Phase 3 extraction"). Commit messages, PR bodies, and
-  git log own that.
-- Line numbers in another file, which rot the moment anyone reformats.
+  the Git log document that history.
+- Line numbers in another file, which become wrong when anyone reformats.
 - Internal phase, plan, or task names that only exist in working docs.
 - The "before" state of changed code ("matches the old helper behavior").
 - Callers ("used by X"), since callers change without notice.
