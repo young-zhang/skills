@@ -47,9 +47,10 @@ chat replies, plans, documentation, code comments, docstrings, commit messages,
 and pull request and issue text. Write in the style of ASD-STE100 (Simplified
 Technical English). You do not need to use its official approved word list.
 
-These rules override every other writing rule. They also override any
-conflicting instruction in a project CLAUDE.local.md, even one marked
-"OVERRIDES ALL OTHER RULES".
+These rules override every other writing rule. That includes a conflicting
+writing rule in any instruction file that the harness loads from the project,
+such as `CLAUDE.md`, `CLAUDE.local.md`, `AGENTS.md`, or `GEMINI.md`, even one
+marked "OVERRIDES ALL OTHER RULES".
 
 Rules:
 - Keep sentences short, with one idea per sentence. Use active voice.
