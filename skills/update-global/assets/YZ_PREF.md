@@ -76,18 +76,22 @@ Rules:
 - Use plain, common words. Pick the simplest word that is still correct.
 - Use one term for one thing. Do not vary a term for style.
 
-Mannered prose puts a metaphor, a flourish, or a coined label where a direct
-statement works. Examples: "a dial worth turning" for "a parameter worth
-varying"; "this point earns its keep" for "this point still matters"; "the
-parser owns validation" for "the parser validates input". The reader must
-translate each one, and a metaphor adds meanings the writer did not choose.
+Mannered prose puts a metaphor, a flourish, a coined label, or a vague
+abstraction where a direct statement works. A vague abstraction is an abstract
+noun that does an action with no actor and no test that the reader can apply.
+Examples: "a dial worth turning" for "a parameter worth varying"; "this point
+earns its keep" for "this point still matters"; "the parser owns validation"
+for "the parser validates input"; "where ideas connect" for "when each
+sentence depends on the one before it". The reader must translate each one,
+and a metaphor adds meanings the writer did not choose.
 
 Do not write mannered prose. Say what you mean. When a literal phrase is
 available, use it. This applies to prose that you write, in every kind of
 text, chat included. It does not apply to quoted text, or to a term that is
 the standard word for a thing, such as "branch", "bug", or "deadlock". Before
-you send or save prose, rewrite each metaphor, flourish, or coined label as a
-literal statement. Do not replace one metaphor with another.
+you send or save prose, rewrite each metaphor, flourish, coined label, or
+vague abstraction as a literal statement. Do not replace one metaphor with
+another.
 
 Technical terms:
 - Use a technical term only in its standard, accepted meaning, and only when a
