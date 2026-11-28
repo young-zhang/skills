@@ -198,13 +198,18 @@ same commit:
 - `.codex-plugin/plugin.json`
 - `.antigravity-plugin/plugin.json`
 
-Every commit sets a new version of the form `yy.ddd.n`:
+Every commit on `master` sets a new version of the form `yy.ddd.n`:
 
 - `yy` is the last two digits of the year, for example `26` for 2026.
 - `ddd` is the day of the year, counted from `0` for January 1. November 22,
   2026 is `325`.
-- `n` counts the commits made on that day, starting from `0`. The first
-  commit of the day is `0`, the next is `1`, and so on.
+- `n` counts the versions set on that day, starting from `0`. The first
+  version of the day is `0`, the next is `1`, and so on.
+
+On a branch other than `master`, do not change the version. The manifests keep
+the version that `master` has. Set the new version once, in the last commit
+before the branch is merged into `master`. Work it out from the version on
+`master` and the date of that commit.
 
 Use the local date of the commit. If the current version already starts with
 today's `yy.ddd`, increase `n` by one. If not, set `n` to `0`. Do not add
@@ -238,8 +243,8 @@ node -e "for (const f of ['.claude-plugin/plugin.json','.claude-plugin/marketpla
 If Antigravity is installed, also run `agy plugin validate .`.
 
 If Copilot CLI is installed, also run `copilot --plugin-dir . plugin list`.
-Copilot CLI has no validate command. The output must list `yz` with the new
-version under "External Plugins (via --plugin-dir)".
+Copilot CLI has no validate command. The output must list `yz` with the
+version in the manifests under "External Plugins (via --plugin-dir)".
 
 `claude plugin validate .` reports a warning that `CLAUDE.md` at the plugin
 root is not loaded as plugin context. `agy plugin validate .` reports a
