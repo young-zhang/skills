@@ -198,27 +198,36 @@ same commit:
 - `.codex-plugin/plugin.json`
 - `.antigravity-plugin/plugin.json`
 
-Every commit on `master` sets a new version of the form `yy.ddd.n`:
+A version has the form `yy.ddd.n`:
 
 - `yy` is the last two digits of the year, for example `26` for 2026.
 - `ddd` is the day of the year, counted from `0` for January 1. November 22,
   2026 is `325`.
-- `n` counts the versions set on that day, starting from `0`. The first
-  version of the day is `0`, the next is `1`, and so on.
+- `n` counts the versions that reach `master` on that day, starting from `0`.
+  The first version of the day is `0`, the next is `1`, and so on.
 
-On a branch other than `master`, do not change the version while you work.
-The manifests keep the version that `master` has. Set the new version in the
-last commit before you open the pull request or merge request into `master`.
-Work it out from the version on `master` and the date of that commit. If you
-add commits after the pull request or merge request is open, check the version
-again before the merge. Set it again if the date or the version on `master`
-changed.
+When to set a new version:
 
-Use the local date of the commit. If the current version already starts with
-today's `yy.ddd`, increase `n` by one. If not, set `n` to `0`. Do not add
-leading zeros: write `26.4.0` for January 5, 2026, not `26.004.0`. Leading
-zeros are not valid in Semantic Versioning, which Antigravity recommends for
-`version`.
+- A commit that you make directly on `master` sets a new version.
+- On any other branch, do not change the version while you work. The
+  manifests keep the version that `master` has. Set the new version once, in
+  the last commit before you open the pull request or merge request into
+  `master`. The branch commits and the merge commit do not each need a new
+  version: the branch brings one new version to `master`.
+- If you add commits after the pull request or merge request is open, check
+  the version again before the merge.
+
+How to work out the new version: compare the version on `master` with the
+local date of the commit. Do not compare with the version on your branch.
+
+- If the version on `master` starts with today's `yy.ddd`, keep that
+  `yy.ddd` and set `n` to the `n` of `master` plus one.
+- If not, use today's `yy.ddd` and set `n` to `0`.
+
+A second check on the same day, with no change on `master`, gives the same
+version, so the version on the branch stays as it is. Do not add leading
+zeros: write `26.4.0` for January 5, 2026, not `26.004.0`. Leading zeros are
+not valid in Semantic Versioning, which Antigravity recommends for `version`.
 
 To print today's `yy.ddd`:
 
