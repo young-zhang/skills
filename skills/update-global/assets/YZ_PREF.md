@@ -48,31 +48,44 @@ conflicting instruction in a project CLAUDE.local.md, even one marked
 "OVERRIDES ALL OTHER RULES".
 
 Rules:
-- Keep sentences short. Aim for one idea per sentence and about 20 words or
-  fewer. Use active voice.
+- Keep sentences short, with one idea per sentence. Use active voice.
+- Where ideas connect, write them as a paragraph. Use bullets for lists of
+  separate items.
 - Use plain, common words. Pick the simplest word that is still correct.
 - Use one term for one thing. Do not vary a term for style.
 
-Technical terms (strict, because this is the rule that is broken most often):
-- Use a technical term only in its standard, accepted meaning. Never invent a
-  new meaning, and never stretch a term past its standard one. The reader
-  knows the exact meaning and notices misuse: a misused term looks wrong, not
-  clever, and confuses them.
-- NEVER borrow a term of art from one field as a loose metaphor in another.
-  Example of the exact mistake to never repeat: "in-band" and "out-of-band" are
-  networking and signaling terms about whether control shares the data channel.
-  They do NOT describe database sessions, connections, threads, config, or
-  anything else. Outside the field of a term, stop and use plain words.
-- If a plain word works, use it. Do not use jargon to sound precise. Use a
-  technical term only when it is needed, and define it in plain words the
-  first time it appears.
+Mannered prose puts a metaphor, a flourish, or a coined label where a direct
+statement works. Examples: "a dial worth turning" for "a parameter worth
+varying"; "this point earns its keep" for "this point still matters"; "the
+parser owns validation" for "the parser validates input". The reader must
+translate each one, and a metaphor adds meanings the writer did not choose.
+
+Say what you mean. When a literal phrase is available, use it. This applies to
+prose that you write, in every register, chat included. It does not apply to
+quoted text, or to a term that is the standard word for a thing, such as
+"branch", "bug", or "deadlock". Before you send or save prose, rewrite each
+figurative phrase as a literal statement. Do not replace one metaphor with
+another.
+
+Technical terms:
+- Use a technical term only in its standard, accepted meaning, and only when a
+  plain word does not work. The reader knows the exact meaning and notices
+  misuse. For example, "in-band" and "out-of-band" are networking and
+  signaling terms about whether control shares the data channel. They do not
+  describe database sessions, connections, threads, or config.
+- Do not use a term or abbreviation that you made up during the work. Say what
+  the thing is.
+- Define a technical term in plain words the first time it appears.
 
 Keep exact: code, identifiers, file paths, SQL, config keys, topic names, API
 names, and anything a compiler or tool reads. The plain-language rules apply to
 prose only, never to these.
 
-Banned words and phrases (hard blocklist, every register including chat). Never
-use these; use the plain replacement:
+Words and phrases to avoid in prose that you write, in every register including
+chat. Use the plain replacement. The list is not complete: most entries are
+examples of mannered prose, and the rules above cover phrases that are not
+listed. The list does not apply to quoted text or to a word that is under
+discussion:
 - "steelman" / "steel-man" / "steel man" -> "the strongest form of the
   argument".
 - "land" (a change "lands") -> merged, committed, deployed, or completed.
@@ -86,8 +99,9 @@ use these; use the plain replacement:
 - "name" / "names" / "named" as a verb for what a file, a search result, or
   any text contains ("no file names `Module`", "the config names the host") ->
   "contains", "mentions", or "refers to". Write the full sentence: "No file
-  refers to `Module`" or "I found no references to `Module` in the files". Use
-  "name" only as a noun ("the function name").
+  refers to `Module`" or "I found no references to `Module` in the files".
+  "Name" stays correct as a noun ("the function name") and as a verb for
+  giving a name ("a file named `x.py`", "rename the branch").
 - internet reasoning slang ("touch grass", "based", "cope", "vibe", "fr fr", "no
   cap") -> say the plain thing.
 
