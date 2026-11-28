@@ -152,30 +152,40 @@ a new version.
 ### Update in Claude Code
 
 Claude Code does not update third-party marketplaces automatically by
-default. Run these commands in the shell, then run `/reload-plugins` in an
-open session or start a new one:
+default. Run these commands in the shell:
 
 ```sh
 claude plugin marketplace update young-zhang-skills
 claude plugin update yz@young-zhang-skills
+claude "/yz:update-global"
 ```
 
 The first command refreshes the marketplace listing. The second command
-installs the new version. To enable automatic updates for this marketplace,
+installs the new version. The third command starts a new session that runs
+`/yz:update-global`, which copies the new preferences file into the global
+instructions. Exit that session when the skill finishes, and start a new
+one, because Claude Code reads the global instructions only when a session
+starts. In a session that was open before the update, run `/reload-plugins`
+to load the new version of the skills. To enable automatic updates for this marketplace,
 open `/plugin` in a session, go to the Marketplaces tab, and enable
 auto-update.
 
 ### Update in Codex CLI
 
-Run this command in the shell, then start a new session:
+Run these commands in the shell:
 
 ```sh
 codex plugin marketplace upgrade young-zhang-skills
+codex '$yz:update-global'
 ```
 
-The command fetches the latest marketplace snapshot from GitHub and refreshes
-the installed plugin from it. If a skill still shows its old text, copy the
-plugin again:
+The first command fetches the latest marketplace snapshot from GitHub and
+refreshes the installed plugin from it. The second command starts a new
+session that runs `$yz:update-global`, which copies the new preferences into
+the global instructions. The single quotes stop the shell from expanding
+`$yz`. Exit that session when the skill finishes, and start a new one. If a
+skill still shows its old text, copy the plugin again, then run the second
+command again:
 
 ```sh
 codex plugin add yz@young-zhang-skills
@@ -189,25 +199,35 @@ Run `codex plugin list` to confirm the new version.
 
 Antigravity has no update command for a plugin installed from a GitHub URL.
 Run the install command again in the shell. Antigravity replaces the
-installed copy. Then start a new conversation:
+installed copy. Then run the skill in a new conversation:
 
 ```sh
 agy plugin install https://github.com/young-zhang/skills
+agy -i "/update-global"
 ```
+
+The second command starts a new conversation that runs `/update-global`,
+which copies the new preferences file into the global instructions.
+Antigravity reads its rules again before each turn, so the conversation needs
+no restart.
 
 Run `agy plugin list` to confirm the new version.
 
 ### Update in Copilot CLI
 
-Run these commands in the shell, then start a new session:
+Run these commands in the shell:
 
 ```sh
 copilot plugin marketplace update young-zhang-skills
 copilot plugin update yz@young-zhang-skills
+copilot -i "/yz:update-global"
 ```
 
 The first command refreshes the marketplace listing. The second command
-installs the new version. `copilot plugin update --all` updates every
+installs the new version. The third command starts a new interactive session
+that runs `/yz:update-global`, which copies the new preferences into the
+global instructions. Exit that session when the skill finishes, and start a
+new one. `copilot plugin update --all` updates every
 installed plugin. In a session, the `/plugin` dashboard marks a plugin that has
 a newer version and offers an **Update** action. Run `copilot plugin list` to
 confirm the new version.
