@@ -206,10 +206,13 @@ Every commit on `master` sets a new version of the form `yy.ddd.n`:
 - `n` counts the versions set on that day, starting from `0`. The first
   version of the day is `0`, the next is `1`, and so on.
 
-On a branch other than `master`, do not change the version. The manifests keep
-the version that `master` has. Set the new version once, in the last commit
-before the branch is merged into `master`. Work it out from the version on
-`master` and the date of that commit.
+On a branch other than `master`, do not change the version while you work.
+The manifests keep the version that `master` has. Set the new version in the
+last commit before you open the pull request or merge request into `master`.
+Work it out from the version on `master` and the date of that commit. If you
+add commits after the pull request or merge request is open, check the version
+again before the merge. Set it again if the date or the version on `master`
+changed.
 
 Use the local date of the commit. If the current version already starts with
 today's `yy.ddd`, increase `n` by one. If not, set `n` to `0`. Do not add
