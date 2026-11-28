@@ -70,8 +70,9 @@ word list.
 
 Rules:
 - Keep sentences short, with one idea per sentence. Use active voice.
-- Where ideas connect, write them as a paragraph. Use bullets for lists of
-  separate items.
+- Use a paragraph when each sentence depends on the one before it, for example
+  as a reason, a result, a condition, or a contrast. Use bullets for separate
+  items that the reader can read in any order.
 - Use plain, common words. Pick the simplest word that is still correct.
 - Use one term for one thing. Do not vary a term for style.
 
